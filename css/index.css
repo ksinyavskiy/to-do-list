@@ -14,6 +14,7 @@ body {
   background-color: #9c9c9c;
   border: 1px solid #868686;
   margin: 40px auto;
+  border-radius: 10px;
 }
 
 /* input container */
@@ -35,7 +36,6 @@ body {
   height: 50px;
   border: 1px solid #868686;
   border-radius: 5px;
-  margin-bottom: 10px;
   background-color: #e0e0e0;
   box-shadow: 5px 5px 2px;
   margin: 10px 8px;
@@ -74,4 +74,22 @@ body {
 }
 .btn:hover {
   background-color: #044862;
+}
+
+/* animation */
+@keyframes itemDisappearing {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+.removeAnimation {
+  animation: itemDisappearing 1s forwards ease-in-out;
 }

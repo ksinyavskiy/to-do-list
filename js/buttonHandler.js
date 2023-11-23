@@ -87,6 +87,9 @@ function configureActionsButton() {
   }
 }
 
-function removeTask(itemToRemove) {
-  document.querySelector('#data-container').removeChild(itemToRemove);
+function removeTask(item) {
+  item.classList.add('removeAnimation');
+  setTimeout(() => {
+    document.querySelector('#data-container').removeChild(item);
+  }, 1100);
 }
