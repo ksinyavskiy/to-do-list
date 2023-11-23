@@ -1,7 +1,10 @@
 'use strict';
 
+let removeBtnIdCounter = 0;
+let editBtnIdCounter = 0;
+
 function addTaskHandler() {
-  const dataContainer = document.querySelector('.data-container');
+  const dataContainer = document.querySelector('#data-container');
   const item = createItemDiv();
   const textDiv = document.createElement('div');
   textDiv.classList.add('task-text');
@@ -14,6 +17,9 @@ function addTaskHandler() {
   
   span.textContent = task.value;
   textDiv.appendChild(span);
+
+  /* we need to add it here cause the remove and edit buttons don't exist in the DOM before the Add Task button's click */
+  configureActionsButton();
 }
 
 function createItemDiv() {
@@ -30,9 +36,12 @@ function createActionsDiv() {
   const actionsDiv = document.createElement('div');
   actionsDiv.classList.add('actions');
 
-  const editBtn = createBtn('editBtn', 'Edit Task');
-  const removeBtn = createBtn('removeBtn', 'Remove Task');
+  const editBtn = createBtn(`editBtn-${editBtnIdCounter}`, 'Edit Task');
+  const removeBtn = createBtn(`removeBtn-${removeBtnIdCounter}`, 'Remove Task');
   const buttons = [editBtn, removeBtn];
+
+  editBtnIdCounter++;
+  removeBtnIdCounter++;
 
   const ul = createUlWithBtn(buttons);
   actionsDiv.appendChild(ul);
@@ -60,4 +69,24 @@ function createBtn(id, text) {
   btn.textContent = text;
 
   return btn;
+}
+
+/* actions' buttons logic */
+function configureActionsButton() {
+  const actions = document.querySelectorAll('.actions');
+
+  for (const action of actions) {
+    action.addEventListener('click', e => {
+      const itemWrapper = e.target.closest('.item');
+      const btnId = e.target.id;
+      
+      if (btnId.startsWith('removeBtn')) {
+        removeTask(itemWrapper);
+      }
+    });
+  }
+}
+
+function removeTask(itemToRemove) {
+  document.querySelector('#data-container').removeChild(itemToRemove);
 }

@@ -28,7 +28,7 @@ body {
 }
 
 /* data container */
-.data-container {
+#data-container {
   overflow: auto;
 }
 .item {
