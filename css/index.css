@@ -12,7 +12,7 @@ body {
 .container {
   max-width: 1050px;
   height: 500px;
-  background-color: #e0e0e0;
+  background-color: #9c9c9c;
   border: 1px solid #868686;
   margin: 40px auto;
 }
@@ -30,14 +30,31 @@ body {
 /* data container */
 .data-container {
   overflow: auto;
-  height: 50px;
 }
 .item {
   position: relative;
+  height: 50px;
+  border: 1px solid #868686;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #e0e0e0;
+  box-shadow: 5px 5px 2px;
+  margin: 10px 8px;
+}
+.item .task-text {
+  float: left;
+  height: 100%;
+  width: 70%;
+}
+.item .task-text span {
+  display: inline-block;
+  margin: auto;
+  padding-top: 10px;
 }
 .actions {
   position: absolute;
   right: 10px;
+  top: 3px;
 }
 .actions ul {
   list-style: none;
@@ -55,4 +72,8 @@ body {
   padding: 10px;
   font-size: 18px;
   cursor: pointer;
+  border-radius: 5px;
+}
+.btn:hover {
+  background-color: #044862;
 }
