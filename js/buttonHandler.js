@@ -9,14 +9,14 @@ function addTaskHandler() {
   const textDiv = document.createElement('div');
   textDiv.classList.add('task-text');
 
-  item.appendChild(textDiv);
-  dataContainer.appendChild(item);
-
   const task = document.querySelector('.input-container input');
   const span = document.createElement('span');
   
   span.textContent = task.value;
   textDiv.appendChild(span);
+
+  item.appendChild(textDiv);
+  dataContainer.appendChild(item);
 
   /* we need to add it here cause the remove and edit buttons don't exist in the DOM before the Add Task button's click */
   configureActionsButton();
@@ -79,7 +79,7 @@ function configureActionsButton() {
     action.addEventListener('click', e => {
       const itemWrapper = e.target.closest('.item');
       const btnId = e.target.id;
-      
+
       if (btnId.startsWith('removeBtn')) {
         removeTask(itemWrapper);
       }
