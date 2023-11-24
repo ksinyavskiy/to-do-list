@@ -2,6 +2,7 @@
 
 let removeBtnIdCounter = 0;
 let editBtnIdCounter = 0;
+let saveBtnId = 0;
 
 function addTaskHandler() {
   const dataContainer = document.querySelector('#data-container');
@@ -82,6 +83,8 @@ function configureActionsButton() {
 
       if (btnId.startsWith('removeBtn')) {
         removeTask(itemWrapper);
+      } else {
+        editTask(itemWrapper);
       }
     });
   }
@@ -92,4 +95,36 @@ function removeTask(item) {
   setTimeout(() => {
     document.querySelector('#data-container').removeChild(item);
   }, 1100);
+}
+
+function editTask(itemWrapper) {
+  const taskDiv = itemWrapper.querySelector('.task-text');
+  const span = itemWrapper.querySelector('.task-text span');
+  let spanText = span.innerHTML;
+
+  taskDiv.removeChild(span);
+  const inputText = document.createElement('input');
+  inputText.value = spanText;
+  inputText.placeholder = 'Enter the edited task here...';
+
+  taskDiv.appendChild(inputText);
+
+  const actions = itemWrapper.querySelector('.actions');
+
+  const saveBtn = createBtn(`saveBtn-${saveBtnId}`, 'Save Changes');
+  saveBtn.addEventListener('click', () => {
+    const span = document.createElement('span');
+    span.textContent = inputText.value;
+    taskDiv.removeChild(inputText);
+    taskDiv.appendChild(span);
+
+    const editBtn = createBtn(`editBtn-${editBtnIdCounter}`, 'Edit Task');
+    const removeBtn = createBtn(`removeBtn-${removeBtnIdCounter}`, 'Remove Task');
+    const buttons = [editBtn, removeBtn];
+    const ul = createUlWithBtn(buttons);
+
+    actions.replaceChildren(ul);
+  });
+
+  actions.replaceChildren(saveBtn);
 }
